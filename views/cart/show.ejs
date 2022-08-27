@@ -1,0 +1,57 @@
+<%- include("../partials/header") %>
+
+<div class="container cart-show">
+	<div class="px-2 px-lg-3 pt-0">
+		<% user.cart.items.forEach(function(cartItem){ %>
+			<div class="mb-3">	
+				<hr class="mt-0">
+				<div class="row">
+					<div class="col-3">
+						 <a href="/products/<%= cartItem.product._id %>">
+						 	<div class="resp-img cart" style="background-image:url('<%= cartItem.product.image %>')"></div>
+						 </a>
+					</div>
+					<div class="col-9">
+						<a href="/products/<%= cartItem.product._id %>">
+							<div class="a mb-2">
+								<%= cartItem.product.name.substring(0,50) %><% if(cartItem.product.name.length>50) { %>&nbsp...<% } %>
+							</div>
+						</a>
+
+						<h6>
+							<span class="mr-1">₹<%= cartItem.product.price %></span>
+							<span class="nowrap">
+								<span class="mrp mr-1">₹<%= cartItem.product.mrp %></span>
+								<span class="disc"><%= cartItem.product.disc_perc %>% off</span>
+							</span>
+							<div class="disc nowrap">You Save ₹<%= cartItem.product.discount %></div>
+						</h6>
+
+						<div class="float-right ml-2">
+							<a href="/cart/<%= cartItem.product._id %>/rem" class="btn btn-danger">Delete</a> 
+						</div>
+
+					</div>
+				</div> 
+			</div>
+		<% }); %>
+	</div>
+	<% if(user.cart.items.length>0){ %>
+		<div class="border pt-3 pb-2 px-3 my-4">
+			<h6 class="float-right">₹<%=user.cart.cart_total%></h6>
+			<h6>Cart Total</h6>
+			<h6 class="float-right disc">₹<%=user.cart.discount%></h6>
+			<h6 class="disc">Discount</h6>
+			<h6 class="float-right">₹<%=user.cart.total%></h6>
+			<h6>Net Amount</h6>
+		</div>
+		<a href="/checkout" class="btn btn-primary float-right mb-5">Checkout</a>
+	<% } else { %>
+		<div class="text-center screen-center-cart" style="margin-top: 100px">
+			<h5>Empty</h5>
+			<a href="/products" class="btn btn-primary">Return to Home</a>
+		</div>
+	<% } %>
+</div>
+
+<%- include("../partials/footer") %>

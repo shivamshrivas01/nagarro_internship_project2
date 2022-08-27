@@ -1,0 +1,17 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+  <div class="jumbotron my-4 my-2 text-center">
+    <h4>CATEGORIES</h4>
+  </div>
+
+  <div class="catagories">
+    <% categories.forEach(category => { %>
+    <a style="width: 32rem" href="/products">
+      <div class="category-container text-center mb-2"><%= category %></div>
+    </a>
+    <% }) %>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>
